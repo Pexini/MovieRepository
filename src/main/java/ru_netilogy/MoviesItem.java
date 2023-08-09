@@ -14,9 +14,6 @@ public class MoviesItem {
     private String FilmGenre;
     private LocalDate ReleaseDate;
 
-    public static void main(String[] args) {
 
-        System.out.println("Hello world!");
-    }
 }
 
