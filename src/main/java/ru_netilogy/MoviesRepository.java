@@ -16,8 +16,23 @@ public class MoviesRepository {
     public MoviesItem[] findAll() {
         return movies;
     }
-//
-//    public String[] findLast();
-//
-//    {
+
+
+    public MoviesItem[] findLast() {
+        int resultLength;
+        if (movies.length < 5) {
+            resultLength = movies.length;
+        } else {
+            resultLength = 5;
+        }
+        MoviesItem[] tmp = new MoviesItem[resultLength];
+        for (int i = 0; i < tmp.length; i++) {
+
+            tmp[i] = movies[movies.length - 1 - i];
+        }
+        return tmp;
+    }
 }
+
+
+
