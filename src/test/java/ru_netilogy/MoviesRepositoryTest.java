@@ -3,16 +3,18 @@ package ru_netilogy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoviesRepositoryTest {
-    MoviesItem movies1 = new MoviesItem("Бладшот", "Боевик", 2023 / 5 / 12);
-    MoviesItem movies2 = new MoviesItem("Вперед", "Мультфильм", 2023 / 4 / 5);
-    MoviesItem movies3 = new MoviesItem("Отель Белград", "Комедия", 2023 / 5 / 2);
-    MoviesItem movies4 = new MoviesItem("Джентельмены", "Боевик", 2023 / 7 / 17);
-    MoviesItem movies5 = new MoviesItem("Человек невидимка", "Ужасы", 2023 / 11 / 5);
-    MoviesItem movies6 = new MoviesItem("Тролли. Мировой Тур", "Мультики", 2023 / 3 / 19);
-    MoviesItem movies7 = new MoviesItem("Номер Один", "Комедия", 2023 / 02 / 19);
+    MoviesItem movies1 = new MoviesItem(" Бладшот ", " Боевик ", LocalDate.of(2023, 12, 28));
+    MoviesItem movies2 = new MoviesItem(" Вперед ", " Мультфильм ",  LocalDate.of(2023, 7, 4));
+    MoviesItem movies3 = new MoviesItem(" Отель Белград ", " Комедия ", LocalDate.of(2023, 2, 24));
+    MoviesItem movies4 = new MoviesItem(" Джентельмены ", " Боевик ", LocalDate.of(2023, 8, 12));
+    MoviesItem movies5 = new MoviesItem(" Человек невидимка ", " Ужасы ", LocalDate.of(2023, 10, 8));
+    MoviesItem movies6 = new MoviesItem(" Тролли. Мировой Тур", " Мультики ", LocalDate.of(2023, 11, 11));
+    MoviesItem movies7 = new MoviesItem(" Номер Один ", " Комедия ", LocalDate.of(2023, 7, 1));
 
 
     @Test
@@ -90,5 +92,72 @@ class MoviesRepositoryTest {
         MoviesItem[] actual = repo.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getLastTreeMovie() {
+        MoviesRepository repo = new MoviesRepository(3);
+        repo.addMovie(movies1);
+        repo.addMovie(movies2);
+        repo.addMovie(movies3);
+        repo.addMovie(movies4);
+        repo.addMovie(movies5);
+        repo.addMovie(movies6);
+        repo.addMovie(movies7);
+
+
+        MoviesItem[] expected = {movies7, movies6, movies5};
+        MoviesItem[] actual = repo.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getNullMovie() {
+        MoviesRepository repo = new MoviesRepository(0);
+        repo.addMovie(movies1);
+        repo.addMovie(movies2);
+        repo.addMovie(movies3);
+        repo.addMovie(movies4);
+        repo.addMovie(movies5);
+        repo.addMovie(movies6);
+        repo.addMovie(movies7);
+
+
+        MoviesItem[] expected = {};
+        MoviesItem[] actual = repo.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void getLastAfterMax() {
+        MoviesRepository repo = new MoviesRepository(8);
+
+        repo.addMovie(movies1);
+        repo.addMovie(movies2);
+        repo.addMovie(movies3);
+        repo.addMovie(movies4);
+        repo.addMovie(movies5);
+        repo.addMovie(movies6);
+        repo.addMovie(movies7);
+
+
+        MoviesItem[] expected = {movies7, movies6, movies5, movies4, movies3, movies2, movies1};
+        MoviesItem[] actual = repo.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void printMovies() {
+        MoviesItem[] movies = {movies7, movies6, movies5, movies4, movies3, movies2, movies1};
+        for (MoviesItem movie : movies) {
+            System.out.println();
+            System.out.println("Название Фильма: " + movie.getMovieName());
+            System.out.println("Жанр Фильма: " + movie.getFilmGenre());
+            System.out.println("Дата выхода: " + movie.getReleaseDate());
+            System.out.println();
+        }
     }
 }

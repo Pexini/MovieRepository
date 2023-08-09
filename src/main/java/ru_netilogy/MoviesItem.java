@@ -4,12 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class MoviesItem {
     private String MovieName;
     private String FilmGenre;
-    private int ReleaseDate;
+    private LocalDate ReleaseDate;
 
+    public static void main(String[] args) {
+
+        System.out.println("Hello world!");
+    }
 }
+

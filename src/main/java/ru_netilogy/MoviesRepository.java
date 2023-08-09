@@ -2,7 +2,15 @@ package ru_netilogy;
 
 public class MoviesRepository {
     private MoviesItem[] movies = new MoviesItem[0];
+    private int limit;
 
+    public MoviesRepository() {
+        this.limit = 5;
+    }
+
+    public MoviesRepository(int limit) {
+        this.limit = limit;
+    }
 
     public void addMovie(MoviesItem movie) {
         MoviesItem[] tmp = new MoviesItem[movies.length + 1];
@@ -20,11 +28,12 @@ public class MoviesRepository {
 
     public MoviesItem[] findLast() {
         int resultLength;
-        if (movies.length < 5) {
+        if (movies.length < limit) {
             resultLength = movies.length;
         } else {
-            resultLength = 5;
+            resultLength = limit;
         }
+
         MoviesItem[] tmp = new MoviesItem[resultLength];
         for (int i = 0; i < tmp.length; i++) {
 
@@ -32,6 +41,7 @@ public class MoviesRepository {
         }
         return tmp;
     }
+
 }
 
 
